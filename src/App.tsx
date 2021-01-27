@@ -18,23 +18,21 @@ function App() {
   let [showResult, setShowResult] = useState(false)
 
 
-  const handleRetake = () => {
-    setCurrentStep(0)
-    setQuiz([])
-    setShowResult(false)
-    setScore(0)
-}
+  
 
   useEffect(()=>{
     async function fetchData() {
+      
+      if(quiz.length === 0){
+        const questions = await getQuizDetails(5,'easy')
 
-      const questions = await getQuizDetails(5,'easy')
-
-      setQuiz(questions)
+        setQuiz(questions)
+      }
+      
       
     }
     fetchData();
-  },[])
+  },[quiz])
 
   const handleSubmit = (e:React.FormEvent<EventTarget>,ans:string) =>  {
     e.preventDefault();
@@ -52,6 +50,13 @@ function App() {
     
 
   }
+  const handleRetake = (event:React.FormEvent<EventTarget>) => {
+    event.preventDefault();
+    setCurrentStep(0)
+    setQuiz([])
+    setShowResult(false)
+    setScore(0)
+}
   
   
 
@@ -76,14 +81,10 @@ function App() {
             </Card>
           </Col>
         </Row>
-        
       </Container>
     )
   }
 
-  
-  console.log(quiz)
-  //console.log(score)
 
   return (
     <div>

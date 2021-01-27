@@ -18,10 +18,10 @@ export const QuestionCard : React.FC<questionPropsType> = ({question,option,call
     const renderHTML = (rawHTML: string) => React.createElement("p", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
     return (
-        <Container>
+        <Container fluid >
             <Row>
-                <Col md ={{ span: 6, offset: 3 }}>
-                    <Card >
+                <Col md ={{ span: 6, offset: 3 }} xs={12}>
+                    <Card bg='light'>
                         <Card.Header >Quiz</Card.Header>
                         <Card.Body >
                             {renderHTML(question)}
